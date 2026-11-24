@@ -41,6 +41,8 @@ Widget renders text safely (no HTML from the model), citations link to the pages
 - **Grounded answers.** The system prompt forbids guessing prices, dates, policies or contact details and treats all retrieved text as data, not instructions.
 - **Cost control.** A per-visitor hourly limit, a site-wide daily cap, a one-hour answer cache, `max_tokens` 600 and monthly token tracking on the settings screen.
 - **Privacy.** Only the question, the last few turns and matching public passages are sent. No names, emails or IPs. The API key is never echoed back or included in settings exports, and can live in `wp-config.php` as `ALC_ANTHROPIC_API_KEY`.
+- **Knows the shop.** On WooCommerce sites it also gets live store facts (product count, categories, price range) and finds products by budget or category, so "the best bag for 30k" returns real products with prices.
+- **Buttons, not links.** Pages and products it used appear as buttons under the reply (products show their price), plus a Contact page button when a person is needed.
 - **Fails gracefully.** Every failure (API, PHP or REST blocked by a security plugin) returns a readable message with a code, and the last API error shows on the settings screen next to a one-click "Check connection".
 
 ## Screenshots
