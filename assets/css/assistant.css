@@ -1,0 +1,664 @@
+/* Al-Ibiewi Studio Console: website assistant widget.
+   Defensive resets keep theme styles for buttons and inputs out. */
+
+.alc-ai {
+	--alc-ai-ink: #1c1b19;
+	--alc-ai-muted: #6b6964;
+	--alc-ai-faint: #8a8780;
+	--alc-ai-line: #e9e7e2;
+	--alc-ai-surface: #fafaf8;
+
+	font-family: inherit;
+	font-size: 15px;
+	line-height: 1.5;
+	color: var(--alc-ai-ink);
+	text-align: left;
+	-webkit-font-smoothing: antialiased;
+}
+
+.alc-ai *,
+.alc-ai *::before,
+.alc-ai *::after {
+	box-sizing: border-box;
+}
+
+.alc-ai button,
+.alc-ai input {
+	margin: 0;
+	font: inherit;
+	letter-spacing: normal;
+	text-transform: none;
+	text-shadow: none;
+	box-shadow: none;
+	min-height: 0;
+	min-width: 0;
+	width: auto;
+	line-height: 1.2;
+}
+
+.alc-ai button {
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.alc-ai svg {
+	display: block;
+	flex: none;
+}
+
+.alc-ai__sr {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Launcher */
+.alc-ai--bubble {
+	position: fixed;
+	right: 20px;
+	bottom: calc(20px + var(--alc-ai-offset, 0px) + var(--alc-ai-lift, 0px));
+	z-index: 99999;
+	transition: bottom 0.25s ease;
+}
+
+.alc-ai--bubble.alc-ai--left {
+	right: auto;
+	left: 20px;
+}
+
+/* Not enough room above a lifted bubble: open from the corner instead. */
+.alc-ai--bubble.is-open.is-tight {
+	--alc-ai-lift: 0px;
+}
+
+.alc-ai--left .alc-ai__panel {
+	right: auto;
+	left: 0;
+	transform-origin: bottom left;
+}
+
+.alc-ai .alc-ai__launcher {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 58px;
+	height: 58px;
+	padding: 0;
+	color: var(--alc-ai-accent-ink);
+	background: var(--alc-ai-accent);
+	border: 0;
+	border-radius: 50%;
+	box-shadow: 0 10px 30px rgba(12, 12, 10, 0.22), 0 2px 6px rgba(12, 12, 10, 0.12);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alc-ai .alc-ai__launcher:hover {
+	transform: scale(1.05);
+}
+
+.alc-ai .alc-ai__launcher:focus-visible,
+.alc-ai button:focus-visible,
+.alc-ai a:focus-visible {
+	outline: 3px solid var(--alc-ai-ring);
+	outline-offset: 2px;
+}
+
+/* Panel */
+.alc-ai__panel {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: #fff;
+}
+
+.alc-ai__panel[hidden] {
+	display: none;
+}
+
+.alc-ai--bubble .alc-ai__panel {
+	position: absolute;
+	right: 0;
+	bottom: 72px;
+	width: 380px;
+	height: min(600px, calc(100vh - 108px - var(--alc-ai-offset, 0px) - var(--alc-ai-lift, 0px) - 16px));
+	height: min(600px, calc(100dvh - 108px - var(--alc-ai-offset, 0px) - var(--alc-ai-lift, 0px) - 16px));
+	border-radius: 20px;
+	box-shadow: 0 24px 64px rgba(12, 12, 10, 0.22), 0 2px 8px rgba(12, 12, 10, 0.08);
+	opacity: 0;
+	transform: translateY(10px) scale(0.98);
+	transform-origin: bottom right;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.alc-ai--bubble .alc-ai__panel.is-in {
+	opacity: 1;
+	transform: none;
+}
+
+.alc-ai--inline .alc-ai__panel {
+	width: 100%;
+	max-width: 680px;
+	height: 540px;
+	border: 1px solid var(--alc-ai-line);
+	border-radius: 18px;
+}
+
+/* Header */
+.alc-ai__head {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 14px 14px 16px;
+	border-bottom: 1px solid var(--alc-ai-line);
+}
+
+.alc-ai__avatar {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	overflow: hidden;
+	color: var(--alc-ai-accent-ink);
+	background: var(--alc-ai-accent);
+	border-radius: 12px;
+}
+
+.alc-ai__avatar svg {
+	width: 20px;
+	height: 20px;
+}
+
+.alc-ai__avatar img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.alc-ai__titles {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.alc-ai__name {
+	overflow: hidden;
+	font-size: 15px;
+	font-weight: 600;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.alc-ai__tagline {
+	font-size: 12.5px;
+	color: var(--alc-ai-muted);
+}
+
+.alc-ai .alc-ai__close {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	color: var(--alc-ai-muted);
+	background: transparent;
+	border: 0;
+	border-radius: 10px;
+}
+
+.alc-ai .alc-ai__close:hover {
+	color: var(--alc-ai-ink);
+	background: #f2f1ee;
+}
+
+/* Conversation */
+.alc-ai__log {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 12px;
+	padding: 18px 16px;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	background: var(--alc-ai-surface);
+}
+
+.alc-ai__msg {
+	max-width: 88%;
+	padding: 11px 14px;
+	font-size: 14.5px;
+	line-height: 1.55;
+	border-radius: 16px;
+	word-wrap: break-word;
+}
+
+.alc-ai__msg p {
+	margin: 0 0 6px;
+}
+
+.alc-ai__msg p:last-child {
+	margin-bottom: 0;
+}
+
+.alc-ai__msg ul {
+	margin: 4px 0 6px;
+	padding-left: 18px;
+	list-style: disc;
+}
+
+.alc-ai__msg li {
+	margin: 2px 0;
+}
+
+.alc-ai__msg strong {
+	font-weight: 600;
+}
+
+.alc-ai__msg--bot {
+	align-self: flex-start;
+	background: #fff;
+	border: 1px solid var(--alc-ai-line);
+	border-bottom-left-radius: 6px;
+}
+
+.alc-ai__msg--user {
+	align-self: flex-end;
+	color: var(--alc-ai-accent-ink);
+	background: var(--alc-ai-accent);
+	border-bottom-right-radius: 6px;
+	white-space: pre-wrap;
+}
+
+.alc-ai__msg.is-error {
+	color: #7a2114;
+	background: #fdf1ef;
+	border-color: #f1cbc5;
+}
+
+.alc-ai__msg.is-thinking {
+	position: relative;
+	overflow: hidden;
+	color: var(--alc-ai-muted);
+}
+
+.alc-ai__msg.is-thinking::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 40%;
+	height: 2px;
+	background: var(--alc-ai-accent);
+	animation: alc-ai-scan 1.2s ease-in-out infinite;
+}
+
+@keyframes alc-ai-scan {
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(260%); }
+}
+
+.alc-ai .alc-ai__cite {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 18px;
+	height: 18px;
+	margin: 0 1px 0 3px;
+	padding: 0 4px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1;
+	color: var(--alc-ai-accent-text);
+	text-decoration: none;
+	vertical-align: 1px;
+	background: var(--alc-ai-accent-soft);
+	border-radius: 6px;
+}
+
+.alc-ai .alc-ai__cite:hover {
+	color: var(--alc-ai-accent-ink);
+	background: var(--alc-ai-accent);
+}
+
+/* Sources */
+.alc-ai__sources {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid var(--alc-ai-line);
+}
+
+.alc-ai__sources-label {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--alc-ai-faint);
+}
+
+.alc-ai__sources-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.alc-ai .alc-ai__source {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	max-width: 100%;
+	padding: 4px 10px 4px 4px;
+	font-size: 12.5px;
+	line-height: 1.3;
+	color: var(--alc-ai-ink);
+	text-decoration: none;
+	background: #fff;
+	border: 1px solid var(--alc-ai-line);
+	border-radius: 999px;
+	transition: border-color 0.15s ease;
+}
+
+.alc-ai .alc-ai__source:hover {
+	color: var(--alc-ai-ink);
+	border-color: var(--alc-ai-accent);
+}
+
+.alc-ai__source-n {
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--alc-ai-accent-text);
+	background: var(--alc-ai-accent-soft);
+	border-radius: 50%;
+}
+
+.alc-ai__source-t {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* Suggestions */
+.alc-ai__suggest {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 10px 16px 0;
+	background: var(--alc-ai-surface);
+}
+
+.alc-ai__suggest[hidden] {
+	display: none;
+}
+
+.alc-ai .alc-ai__chip {
+	padding: 8px 12px;
+	font-size: 13px;
+	line-height: 1.3;
+	color: var(--alc-ai-ink);
+	text-align: left;
+	background: #fff;
+	border: 1px solid var(--alc-ai-line);
+	border-radius: 999px;
+	transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.alc-ai .alc-ai__chip:hover {
+	color: var(--alc-ai-accent-text);
+	background: #fff;
+	border-color: var(--alc-ai-accent);
+}
+
+/* Composer */
+.alc-ai__form {
+	display: flex;
+	gap: 8px;
+	margin: 0;
+	padding: 12px;
+	background: var(--alc-ai-surface);
+}
+
+.alc-ai .alc-ai__input {
+	flex: 1;
+	height: 46px;
+	padding: 0 14px;
+	font-size: 15px;
+	color: var(--alc-ai-ink);
+	background: #fff;
+	border: 1px solid #dedcd6;
+	border-radius: 14px;
+	outline: none;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.alc-ai .alc-ai__input:focus {
+	border-color: var(--alc-ai-accent);
+	box-shadow: 0 0 0 3px var(--alc-ai-ring);
+}
+
+.alc-ai .alc-ai__send {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 46px;
+	height: 46px;
+	padding: 0;
+	color: var(--alc-ai-accent-ink);
+	background: var(--alc-ai-accent);
+	border: 0;
+	border-radius: 14px;
+	transition: filter 0.15s ease, opacity 0.15s ease;
+}
+
+.alc-ai .alc-ai__send:hover {
+	filter: brightness(0.93);
+}
+
+.alc-ai .alc-ai__send:disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.alc-ai__foot {
+	display: flex;
+	justify-content: center;
+	gap: 14px;
+	padding: 0 12px 10px;
+	font-size: 11.5px;
+	color: var(--alc-ai-faint);
+	background: var(--alc-ai-surface);
+}
+
+.alc-ai__foot a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.alc-ai__foot a:hover {
+	color: var(--alc-ai-ink);
+	text-decoration: underline;
+}
+
+/* WhatsApp handoff */
+.alc-ai__handoff {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 10px;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid var(--alc-ai-line);
+}
+
+.alc-ai__handoff-lead {
+	font-size: 13px;
+	color: var(--alc-ai-muted);
+}
+
+.alc-ai .alc-ai__wa {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 12px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #0f5132;
+	text-decoration: none;
+	background: #e8f6ee;
+	border: 1px solid #bfe5cf;
+	border-radius: 999px;
+	transition: border-color 0.15s ease;
+}
+
+.alc-ai .alc-ai__wa:hover {
+	color: #0f5132;
+	border-color: #25a55f;
+}
+
+/* Phones: full-screen sheet */
+@media (max-width: 520px) {
+	.alc-ai--bubble {
+		right: 16px;
+		bottom: calc(16px + var(--alc-ai-offset, 0px) + var(--alc-ai-lift, 0px));
+	}
+
+	.alc-ai--bubble.alc-ai--left {
+		right: auto;
+		left: 16px;
+	}
+
+	.alc-ai--bubble.is-open {
+		bottom: 16px;
+	}
+
+	.alc-ai--bubble .alc-ai__panel {
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+	}
+
+	.alc-ai--bubble.is-open .alc-ai__launcher {
+		display: none;
+	}
+
+	.alc-ai .alc-ai__input {
+		font-size: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.alc-ai *,
+	.alc-ai--bubble .alc-ai__panel {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+
+/* Theme-proofing: some themes restyle every input and button with
+   high specificity or !important. Lock the widget's own look. */
+.alc-ai .alc-ai__form .alc-ai__input {
+	height: 46px !important;
+	min-height: 46px !important;
+	margin: 0 !important;
+	padding: 0 14px !important;
+	font-size: 15px !important;
+	line-height: 46px !important;
+	color: var(--alc-ai-ink) !important;
+	background: #fff !important;
+	border: 1px solid #dedcd6 !important;
+	border-radius: 14px !important;
+	box-shadow: none !important;
+	outline: none !important;
+	width: auto !important;
+	max-width: none !important;
+}
+
+.alc-ai .alc-ai__form .alc-ai__input:focus {
+	border-color: var(--alc-ai-accent) !important;
+	box-shadow: 0 0 0 3px var(--alc-ai-ring) !important;
+}
+
+.alc-ai .alc-ai__form .alc-ai__send,
+.alc-ai .alc-ai__launcher {
+	color: var(--alc-ai-accent-ink) !important;
+	background: var(--alc-ai-accent) !important;
+	border: 0 !important;
+	box-shadow: none;
+	padding: 0 !important;
+	min-height: 0 !important;
+	text-indent: 0 !important;
+}
+
+.alc-ai .alc-ai__form .alc-ai__send {
+	width: 46px !important;
+	height: 46px !important;
+	border-radius: 14px !important;
+}
+
+.alc-ai .alc-ai__launcher {
+	width: 58px !important;
+	height: 58px !important;
+	border-radius: 50% !important;
+	box-shadow: 0 10px 30px rgba(12, 12, 10, 0.22), 0 2px 6px rgba(12, 12, 10, 0.12) !important;
+}
+
+.alc-ai .alc-ai__chip,
+.alc-ai .alc-ai__close {
+	text-transform: none !important;
+	letter-spacing: normal !important;
+	box-shadow: none !important;
+	min-height: 0 !important;
+}
+
+.alc-ai .alc-ai__chip {
+	padding: 8px 12px !important;
+	font-size: 13px !important;
+	color: var(--alc-ai-ink) !important;
+	background: #fff !important;
+	border: 1px solid var(--alc-ai-line) !important;
+	border-radius: 999px !important;
+}
+
+.alc-ai .alc-ai__chip:hover {
+	color: var(--alc-ai-accent-text) !important;
+	border-color: var(--alc-ai-accent) !important;
+}
+
+.alc-ai .alc-ai__close {
+	width: 36px !important;
+	height: 36px !important;
+	padding: 0 !important;
+	color: var(--alc-ai-muted) !important;
+	background: transparent !important;
+	border: 0 !important;
+	border-radius: 10px !important;
+}
+
+.alc-ai .alc-ai__close:hover {
+	color: var(--alc-ai-ink) !important;
+	background: #f2f1ee !important;
+}
+
+@media (max-width: 520px) {
+	.alc-ai .alc-ai__form .alc-ai__input {
+		font-size: 16px !important;
+	}
+}

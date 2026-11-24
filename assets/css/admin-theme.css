@@ -1,0 +1,637 @@
+/* Al-Ibiewi Studio Console: branded admin sidebar and top bar.
+   Sizes stay at core values (160px sidebar, 32px bar) so the block editor,
+   WooCommerce and other plugins keep their layout. */
+
+body.alc-chrome {
+	--alc-bar-bg: #ffffff;
+	--alc-bar-ink: #1f1e1c;
+	--alc-bar-muted: #5f5d58;
+	--alc-bar-line: #e7e5e0;
+	--alc-bar-hover: #f3f2ef;
+
+	background: #f5f4f1;
+}
+
+body.alc-chrome #wpcontent,
+body.alc-chrome #wpfooter {
+	font-family: inherit;
+}
+
+/* ===== Sidebar ===== */
+
+body.alc-chrome #adminmenuback,
+body.alc-chrome #adminmenuwrap,
+body.alc-chrome #adminmenu {
+	background: var(--alc-panel);
+}
+
+body.alc-chrome #adminmenuback {
+	box-shadow: inset -1px 0 0 var(--alc-panel-line);
+}
+
+body.alc-chrome #adminmenu {
+	margin: 10px 0 12px;
+	font-family: var(--alc-font);
+}
+
+body.alc-chrome #adminmenu li.menu-top {
+	margin: 1px 8px;
+	border: 0;
+	border-radius: 10px;
+}
+
+body.alc-chrome #adminmenu a.menu-top {
+	display: flow-root;
+	border-radius: 10px;
+}
+
+body.alc-chrome #adminmenu a,
+body.alc-chrome #adminmenu .wp-submenu-head {
+	color: var(--alc-panel-muted);
+}
+
+body.alc-chrome #adminmenu div.wp-menu-name {
+	padding-top: 9px;
+	padding-bottom: 9px;
+	font-weight: 500;
+}
+
+body.alc-chrome #adminmenu div.wp-menu-image::before,
+body.alc-chrome #adminmenu div.wp-menu-image:before {
+	color: var(--alc-panel-muted);
+	opacity: 1;
+}
+
+body.alc-chrome #adminmenu div.wp-menu-image {
+	height: 36px;
+}
+
+body.alc-chrome #adminmenu div.wp-menu-image::before {
+	padding-top: 8px;
+}
+
+body.alc-chrome #adminmenu div.wp-menu-image.svg {
+	background-position: center 9px;
+}
+
+/* Hover and keyboard focus */
+body.alc-chrome #adminmenu li.menu-top:hover,
+body.alc-chrome #adminmenu li.opensub > a.menu-top,
+body.alc-chrome #adminmenu li > a.menu-top:focus {
+	color: var(--alc-panel-ink);
+	background: var(--alc-panel-hover);
+}
+
+body.alc-chrome #adminmenu li.menu-top:hover > a,
+body.alc-chrome #adminmenu li.menu-top > a:focus,
+body.alc-chrome #adminmenu li.opensub > a.menu-top {
+	color: var(--alc-panel-ink);
+}
+
+body.alc-chrome #adminmenu li.menu-top:hover div.wp-menu-image::before,
+body.alc-chrome #adminmenu li.opensub > a.menu-top div.wp-menu-image::before,
+body.alc-chrome #adminmenu li > a.menu-top:focus div.wp-menu-image::before {
+	color: var(--alc-panel-ink);
+}
+
+body.alc-chrome #adminmenu li.wp-has-current-submenu:hover,
+body.alc-chrome #adminmenu li.current:hover {
+	background: transparent;
+}
+
+/* Current section: brand pill */
+body.alc-chrome #adminmenu li.current a.menu-top,
+body.alc-chrome #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+body.alc-chrome #adminmenu li.wp-has-current-submenu .wp-submenu .wp-submenu-head,
+body.alc-chrome.folded #adminmenu li.current.menu-top,
+body.alc-chrome #adminmenu li.current a.menu-top:hover,
+body.alc-chrome #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu:hover,
+body.alc-chrome #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu:focus {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+}
+
+body.alc-chrome #adminmenu li.wp-has-current-submenu > a div.wp-menu-image::before,
+body.alc-chrome #adminmenu li.current > a div.wp-menu-image::before,
+body.alc-chrome #adminmenu li.wp-has-current-submenu:hover > a div.wp-menu-image::before,
+body.alc-chrome #adminmenu li.current:hover > a div.wp-menu-image::before {
+	color: var(--alc-accent-ink);
+}
+
+body.alc-chrome #adminmenu li.wp-has-current-submenu > a div.wp-menu-name,
+body.alc-chrome #adminmenu li.current > a div.wp-menu-name {
+	font-weight: 600;
+}
+
+/* Remove core arrows */
+body.alc-chrome ul#adminmenu a.wp-has-current-submenu::after,
+body.alc-chrome ul#adminmenu > li.current > a.current::after,
+body.alc-chrome #adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover::after,
+body.alc-chrome #adminmenu li.wp-has-submenu.wp-not-current-submenu:focus-within::after,
+body.alc-chrome #adminmenu .wp-menu-arrow {
+	display: none;
+}
+
+/* Submenus: flyout cards */
+body.alc-chrome #adminmenu .wp-submenu,
+body.alc-chrome #adminmenu .wp-has-current-submenu.opensub .wp-submenu,
+body.alc-chrome.folded #adminmenu .wp-has-current-submenu .wp-submenu,
+body.alc-chrome #adminmenu a.wp-has-current-submenu:focus + .wp-submenu {
+	background: var(--alc-panel);
+}
+
+body.alc-chrome #adminmenu .wp-submenu {
+	left: 152px;
+	min-width: 180px;
+	padding: 6px;
+	border: 1px solid var(--alc-panel-line);
+	border-radius: 12px;
+	box-shadow: 0 16px 40px rgba(12, 12, 10, 0.18), 0 2px 6px rgba(12, 12, 10, 0.08);
+}
+
+body.alc-chrome #adminmenu .wp-submenu a {
+	padding: 7px 12px;
+	font-size: 13px;
+	line-height: 1.4;
+	color: var(--alc-panel-muted);
+	border-radius: 8px;
+}
+
+body.alc-chrome #adminmenu .wp-submenu a:hover,
+body.alc-chrome #adminmenu .wp-submenu a:focus,
+body.alc-chrome #adminmenu .wp-submenu li a:hover,
+body.alc-chrome #adminmenu .wp-submenu li a:focus,
+body.alc-chrome #adminmenu .wp-submenu .wp-submenu-head:hover {
+	color: var(--alc-panel-ink);
+	background: var(--alc-panel-hover);
+	box-shadow: none;
+}
+
+body.alc-chrome #adminmenu .wp-submenu li.current a,
+body.alc-chrome #adminmenu .wp-submenu li.current a:hover,
+body.alc-chrome #adminmenu .wp-submenu li.current a:focus {
+	color: var(--alc-panel-ink);
+	font-weight: 600;
+}
+
+body.alc-chrome #adminmenu .wp-submenu .wp-submenu-head {
+	padding: 8px 12px 6px;
+	font-weight: 600;
+	color: var(--alc-panel-ink);
+	background: transparent;
+}
+
+/* The open section's submenu sits inline under its pill */
+body.alc-chrome #adminmenu .wp-has-current-submenu .wp-submenu {
+	left: auto;
+	min-width: 0;
+	margin: 0;
+	padding: 4px 0 8px;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background: transparent;
+}
+
+body.alc-chrome #adminmenu .wp-has-current-submenu .wp-submenu a {
+	padding-left: 36px;
+}
+
+/* Counters */
+body.alc-chrome #adminmenu .awaiting-mod,
+body.alc-chrome #adminmenu .update-plugins,
+body.alc-chrome #adminmenu .menu-counter {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+}
+
+body.alc-chrome #adminmenu li.current a .awaiting-mod,
+body.alc-chrome #adminmenu li a.wp-has-current-submenu .update-plugins,
+body.alc-chrome #adminmenu li.wp-has-current-submenu > a .awaiting-mod,
+body.alc-chrome #adminmenu li.wp-has-current-submenu > a .menu-counter {
+	color: var(--alc-accent);
+	background: var(--alc-accent-ink);
+}
+
+/* Separators and collapse */
+body.alc-chrome #adminmenu li.wp-menu-separator {
+	height: 1px;
+	margin: 10px 16px;
+	background: var(--alc-panel-line);
+}
+
+body.alc-chrome #adminmenu li.wp-menu-separator .separator {
+	display: none;
+}
+
+body.alc-chrome #collapse-button {
+	color: var(--alc-panel-muted);
+}
+
+body.alc-chrome #collapse-button:hover,
+body.alc-chrome #collapse-button:focus {
+	color: var(--alc-panel-ink);
+}
+
+body.alc-chrome #collapse-menu {
+	margin: 10px 8px 16px;
+	border-radius: 10px;
+}
+
+/* Folded (icons only) */
+body.alc-chrome.folded #adminmenu li.menu-top {
+	margin: 2px 0;
+	border-radius: 0;
+}
+
+body.alc-chrome.folded #adminmenu a.menu-top {
+	border-radius: 0;
+}
+
+body.alc-chrome.folded #adminmenu .wp-submenu,
+body.alc-chrome.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+	left: 36px;
+	min-width: 180px;
+	padding: 6px;
+	border: 1px solid var(--alc-panel-line);
+	border-radius: 12px;
+	box-shadow: 0 16px 40px rgba(12, 12, 10, 0.18);
+	background: var(--alc-panel);
+}
+
+body.alc-chrome.folded #adminmenu .wp-has-current-submenu .wp-submenu a {
+	padding-left: 12px;
+}
+
+body.alc-chrome.folded #collapse-menu {
+	margin: 10px 0 16px;
+}
+
+@media only screen and (min-width: 783px) and (max-width: 960px) {
+	body.alc-chrome.auto-fold #adminmenu li.menu-top {
+		margin: 2px 0;
+		border-radius: 0;
+	}
+
+	body.alc-chrome.auto-fold #adminmenu a.menu-top {
+		border-radius: 0;
+	}
+
+	body.alc-chrome.auto-fold #adminmenu .wp-submenu,
+	body.alc-chrome.auto-fold #adminmenu .wp-has-current-submenu .wp-submenu {
+		left: 36px;
+		min-width: 180px;
+		padding: 6px;
+		border: 1px solid var(--alc-panel-line);
+		border-radius: 12px;
+		box-shadow: 0 16px 40px rgba(12, 12, 10, 0.18);
+		background: var(--alc-panel);
+	}
+
+	body.alc-chrome.auto-fold #adminmenu .wp-has-current-submenu .wp-submenu a {
+		padding-left: 12px;
+	}
+
+	body.alc-chrome.auto-fold #collapse-menu {
+		margin: 10px 0 16px;
+	}
+}
+
+/* Phones: core turns the sidebar into a slide-in drawer */
+@media screen and (max-width: 782px) {
+	body.alc-chrome #adminmenu li.menu-top {
+		margin: 2px 10px;
+	}
+
+	body.alc-chrome #adminmenu .wp-submenu,
+	body.alc-chrome.auto-fold #adminmenu .wp-submenu,
+	body.alc-chrome #adminmenu .wp-has-current-submenu .wp-submenu {
+		left: auto;
+		min-width: 0;
+		padding: 4px 0 8px;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+		background: transparent;
+	}
+
+	body.alc-chrome #adminmenu .wp-submenu a,
+	body.alc-chrome #adminmenu .wp-has-current-submenu .wp-submenu a {
+		padding: 10px 12px 10px 44px;
+		font-size: 15px;
+	}
+
+	body.alc-chrome #adminmenu div.wp-menu-name {
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	body.alc-chrome .wp-responsive-open #adminmenuback,
+	body.alc-chrome .wp-responsive-open #adminmenuwrap {
+		box-shadow: 12px 0 40px rgba(12, 12, 10, 0.2);
+	}
+}
+
+/* ===== Top bar ===== */
+
+body.alc-chrome #wpadminbar {
+	color: var(--alc-bar-ink);
+	background: var(--alc-bar-bg);
+	box-shadow: inset 0 -1px 0 var(--alc-bar-line);
+}
+
+body.alc-chrome #wpadminbar .ab-empty-item,
+body.alc-chrome #wpadminbar a.ab-item,
+body.alc-chrome #wpadminbar > #wp-toolbar span.ab-label,
+body.alc-chrome #wpadminbar > #wp-toolbar span.noticon {
+	color: var(--alc-bar-ink);
+}
+
+body.alc-chrome #wpadminbar .ab-item,
+body.alc-chrome #wpadminbar .ab-label,
+body.alc-chrome #wpadminbar .display-name,
+body.alc-chrome #wpadminbar .username {
+	font-family: var(--alc-font);
+}
+
+body.alc-chrome #wpadminbar .ab-icon,
+body.alc-chrome #wpadminbar .ab-icon::before,
+body.alc-chrome #wpadminbar .ab-item::before,
+body.alc-chrome #wpadminbar .ab-item::after {
+	color: var(--alc-bar-muted);
+}
+
+/* Keep icon fonts intact */
+body.alc-chrome #wpadminbar .ab-icon,
+body.alc-chrome #wpadminbar .ab-icon::before,
+body.alc-chrome #wpadminbar .ab-item::before {
+	font-family: dashicons;
+}
+
+body.alc-chrome #wpadminbar .ab-top-menu > li.hover > .ab-item,
+body.alc-chrome #wpadminbar.nojq .quicklinks .ab-top-menu > li > .ab-item:focus,
+body.alc-chrome #wpadminbar:not(.mobile) .ab-top-menu > li:hover > .ab-item,
+body.alc-chrome #wpadminbar:not(.mobile) .ab-top-menu > li > .ab-item:focus {
+	color: var(--alc-bar-ink);
+	background: var(--alc-bar-hover);
+}
+
+body.alc-chrome #wpadminbar:not(.mobile) > #wp-toolbar a:focus span.ab-label,
+body.alc-chrome #wpadminbar:not(.mobile) > #wp-toolbar li:hover span.ab-label,
+body.alc-chrome #wpadminbar > #wp-toolbar li.hover span.ab-label {
+	color: var(--alc-bar-ink);
+}
+
+body.alc-chrome #wpadminbar li:hover .ab-icon::before,
+body.alc-chrome #wpadminbar li:hover .ab-item::before,
+body.alc-chrome #wpadminbar li:hover .ab-item::after,
+body.alc-chrome #wpadminbar li.hover .ab-icon::before,
+body.alc-chrome #wpadminbar li.hover .ab-item::before,
+body.alc-chrome #wpadminbar li .ab-item:focus .ab-icon::before,
+body.alc-chrome #wpadminbar li a:focus .ab-icon::before {
+	color: var(--alc-bar-ink);
+}
+
+/* Dropdowns */
+body.alc-chrome #wpadminbar .menupop .ab-sub-wrapper,
+body.alc-chrome #wpadminbar .shortlink-input {
+	background: #fff;
+	border: 1px solid var(--alc-bar-line);
+	border-radius: 0 0 12px 12px;
+	box-shadow: 0 16px 40px rgba(12, 12, 10, 0.12);
+}
+
+body.alc-chrome #wpadminbar .quicklinks .menupop ul.ab-sub-secondary,
+body.alc-chrome #wpadminbar .quicklinks .menupop ul.ab-sub-secondary .ab-submenu {
+	background: #f7f6f3;
+}
+
+body.alc-chrome #wpadminbar .ab-submenu .ab-item,
+body.alc-chrome #wpadminbar .quicklinks .menupop ul li a,
+body.alc-chrome #wpadminbar .quicklinks .menupop.hover ul li a,
+body.alc-chrome #wpadminbar.nojs .quicklinks .menupop:hover ul li a {
+	color: var(--alc-bar-muted);
+}
+
+body.alc-chrome #wpadminbar .quicklinks .menupop ul li a:hover,
+body.alc-chrome #wpadminbar .quicklinks .menupop ul li a:focus,
+body.alc-chrome #wpadminbar .quicklinks .menupop ul li a:hover strong,
+body.alc-chrome #wpadminbar .quicklinks .menupop ul li a:focus strong,
+body.alc-chrome #wpadminbar .quicklinks .ab-sub-wrapper .menupop.hover > a,
+body.alc-chrome #wpadminbar .quicklinks .menupop.hover ul li a:hover,
+body.alc-chrome #wpadminbar .quicklinks .menupop.hover ul li a:focus,
+body.alc-chrome #wpadminbar ul li.hover .ab-item,
+body.alc-chrome #wpadminbar .quicklinks .menupop .ab-sub-wrapper .menupop:hover > a {
+	color: var(--alc-accent-text);
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-user-info .display-name {
+	color: var(--alc-bar-ink);
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-user-info .username {
+	color: var(--alc-bar-muted);
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-my-account.with-avatar > a img {
+	border: 0;
+	border-radius: 50%;
+	background: var(--alc-bar-hover);
+}
+
+body.alc-chrome #wpadminbar .quicklinks li .blavatar::before,
+body.alc-chrome #wpadminbar .quicklinks li a:hover .blavatar::before {
+	color: var(--alc-bar-muted);
+}
+
+/* Brand mark and help link */
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-brand > .ab-item {
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+}
+
+body.alc-chrome #wpadminbar .alc-ab-mark {
+	display: block;
+	width: auto;
+	max-width: 110px;
+	height: 20px;
+	object-fit: contain;
+}
+
+body.alc-chrome #wpadminbar .alc-ab-mark.is-icon {
+	width: 22px;
+	height: 22px;
+	border-radius: 6px;
+	object-fit: cover;
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help > .ab-item {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	height: 24px;
+	margin: 4px 6px;
+	padding: 0 11px 0 9px;
+	line-height: 24px;
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	border-radius: 999px;
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-label {
+	display: block;
+	height: 24px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 24px;
+	color: var(--alc-accent-ink);
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-icon {
+	float: none;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-icon::before,
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help:hover .ab-icon::before {
+	position: static;
+	display: block;
+	font-size: 16px;
+	line-height: 16px;
+	color: var(--alc-accent-ink);
+}
+
+body.alc-chrome #wpadminbar:not(.mobile) #wp-admin-bar-alc-help:hover > .ab-item,
+body.alc-chrome #wpadminbar #wp-admin-bar-alc-help > .ab-item:focus {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	filter: brightness(0.94);
+}
+
+body.alc-chrome #wpadminbar:not(.mobile) #wp-admin-bar-alc-help:hover .ab-label {
+	color: var(--alc-accent-ink);
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-site-name img.site-icon {
+	border-radius: 5px;
+}
+
+@media screen and (max-width: 782px) {
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-brand {
+		display: block;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-brand > .ab-item {
+		height: 46px;
+		padding: 0 10px;
+	}
+
+	body.alc-chrome #wpadminbar .alc-ab-mark.is-icon {
+		width: 28px;
+		height: 28px;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help {
+		display: block;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help > .ab-item {
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		margin: 5px 6px;
+		padding: 0;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-label {
+		display: none;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-icon {
+		width: 22px;
+		height: 22px;
+	}
+
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help .ab-icon::before,
+	body.alc-chrome #wpadminbar #wp-admin-bar-alc-help:hover .ab-icon::before {
+		width: 22px;
+		font-size: 22px;
+		line-height: 22px;
+	}
+}
+
+/* ===== Primary buttons in brand ===== */
+
+body.alc-chrome.wp-core-ui .button-primary,
+body.alc-chrome .wp-core-ui .button-primary {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	border-color: var(--alc-accent);
+	text-shadow: none;
+}
+
+body.alc-chrome.wp-core-ui .button-primary:hover,
+body.alc-chrome.wp-core-ui .button-primary:focus,
+body.alc-chrome .wp-core-ui .button-primary:hover,
+body.alc-chrome .wp-core-ui .button-primary:focus {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	border-color: var(--alc-accent);
+	filter: brightness(0.92);
+}
+
+body.alc-chrome.wp-core-ui .button-primary:focus,
+body.alc-chrome .wp-core-ui .button-primary:focus {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px var(--alc-accent-ring);
+}
+
+/* ===== Focus and mobile drawer fixes ===== */
+
+body.alc-chrome #adminmenu a:focus,
+body.alc-chrome #adminmenu a:hover {
+	box-shadow: none;
+}
+
+body.alc-chrome #adminmenu a:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--alc-accent-ring);
+}
+
+body.alc-chrome #adminmenu a.menu-top::after {
+	display: none !important;
+}
+
+body.alc-chrome #adminmenu a.wp-has-current-submenu:focus + .wp-submenu li.current a,
+body.alc-chrome #adminmenu .opensub .wp-submenu li.current a,
+body.alc-chrome #adminmenu a.wp-has-current-submenu:focus + .wp-submenu li.current a:hover {
+	color: var(--alc-panel-ink);
+}
+
+body.alc-chrome #adminmenu a.wp-has-current-submenu:focus + .wp-submenu li a {
+	color: var(--alc-panel-muted);
+}
+
+body.alc-chrome #adminmenu a.wp-has-current-submenu:focus + .wp-submenu {
+	background: transparent;
+}
+
+body.alc-chrome #wpadminbar #wp-admin-bar-menu-toggle .ab-icon::before,
+body.alc-chrome .wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle .ab-icon::before {
+	color: var(--alc-bar-ink);
+}
+
+body.alc-chrome .wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle a,
+body.alc-chrome #wpadminbar #wp-admin-bar-menu-toggle a:focus {
+	background: var(--alc-bar-hover);
+}
+
+body.alc-chrome #wpadminbar > #wp-toolbar #wp-admin-bar-alc-help span.ab-label,
+body.alc-chrome #wpadminbar:not(.mobile) > #wp-toolbar #wp-admin-bar-alc-help:hover span.ab-label,
+body.alc-chrome #wpadminbar > #wp-toolbar #wp-admin-bar-alc-help.hover span.ab-label,
+body.alc-chrome #wpadminbar:not(.mobile) > #wp-toolbar #wp-admin-bar-alc-help a:focus span.ab-label {
+	color: var(--alc-accent-ink);
+}

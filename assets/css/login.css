@@ -1,0 +1,577 @@
+/* Al-Ibiewi Studio Console: branded login */
+
+body.alc-login {
+	--alc-split: min(46vw, 760px);
+	--alc-ink: #0b0b0b;
+	--alc-text: #4f4d48;
+	--alc-line: #dedcd6;
+	--alc-surface: #f5f4f1;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-height: 100vh;
+	margin: 0;
+	padding: 48px 32px 48px calc(var(--alc-split) + 32px);
+	background: var(--alc-surface);
+	color: var(--alc-ink);
+	font-family: var(--alc-font);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Brand panel */
+.alc-brand {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 40px;
+	box-sizing: border-box;
+	width: var(--alc-split);
+	padding: clamp(32px, 4vw, 64px);
+	overflow: hidden;
+	background-color: var(--alc-panel);
+	color: var(--alc-panel-ink);
+}
+
+.alc-has-image .alc-brand {
+	background-image: linear-gradient(var(--alc-panel-veil), var(--alc-panel-veil)), var(--alc-panel-image);
+	background-size: cover;
+	background-position: center;
+}
+
+.alc-brand__top {
+	display: inline-flex;
+	align-self: flex-start;
+	color: inherit;
+	text-decoration: none;
+	border-radius: 6px;
+}
+
+.alc-brand__top:focus-visible {
+	outline: 2px solid var(--alc-accent);
+	outline-offset: 6px;
+	box-shadow: none;
+}
+
+.alc-brand__logo {
+	display: block;
+	width: var(--alc-logo-width);
+	max-width: 100%;
+	height: auto;
+	max-height: 88px;
+	object-fit: contain;
+	object-position: left center;
+}
+
+.alc-brand__top:has(.alc-brand__icon) {
+	align-items: center;
+	gap: 12px;
+}
+
+.alc-brand__icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	object-fit: cover;
+}
+
+.alc-logo-chip-light .alc-brand__logo,
+.alc-logo-chip-dark .alc-brand__logo {
+	box-sizing: content-box;
+	padding: 10px 14px;
+	border-radius: 12px;
+}
+
+.alc-logo-chip-light .alc-brand__logo {
+	background: #fff;
+}
+
+.alc-logo-chip-dark .alc-brand__logo {
+	background: #0b0b0b;
+}
+
+.alc-brand__wordmark {
+	font-family: var(--alc-font-display);
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+}
+
+.alc-brand__body::before {
+	content: "";
+	display: block;
+	width: 44px;
+	height: 3px;
+	margin-bottom: 28px;
+	border-radius: 2px;
+	background: var(--alc-accent-on-panel);
+}
+
+.alc-brand__headline {
+	max-width: 12ch;
+	margin: 0;
+	font-family: var(--alc-font-display);
+	font-size: clamp(40px, 4.6vw, 76px);
+	font-weight: 600;
+	line-height: 1.02;
+	letter-spacing: -0.035em;
+	color: var(--alc-panel-ink);
+}
+
+.alc-brand__sub {
+	max-width: 40ch;
+	margin: 22px 0 0;
+	font-size: 17px;
+	line-height: 1.6;
+	color: var(--alc-panel-muted);
+}
+
+.alc-brand__foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px 24px;
+	padding-top: 22px;
+	border-top: 1px solid var(--alc-panel-line);
+	font-size: 13px;
+	color: var(--alc-panel-muted);
+}
+
+.alc-credit {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--alc-panel-muted);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.alc-credit strong {
+	font-weight: 600;
+	color: var(--alc-panel-ink);
+	transition: color 0.2s ease;
+}
+
+.alc-credit:hover strong,
+.alc-credit:focus-visible strong {
+	color: var(--alc-accent-on-panel);
+}
+
+.alc-credit:focus-visible {
+	outline: 2px solid var(--alc-accent);
+	outline-offset: 4px;
+	box-shadow: none;
+	border-radius: 4px;
+}
+
+.alc-credit__mark {
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
+/* Form column */
+.alc-login #login {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 400px;
+	margin: 0;
+	padding: 0;
+}
+
+.alc-login #login h1.wp-login-logo {
+	display: none;
+}
+
+.alc-form-head {
+	margin-bottom: 28px;
+}
+
+.alc-form-head__title {
+	margin: 0 0 8px;
+	font-family: var(--alc-font-display);
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+	color: var(--alc-ink);
+}
+
+.alc-form-head__sub {
+	margin: 0;
+	font-size: 15px;
+	line-height: 1.5;
+	color: var(--alc-text);
+}
+
+.alc-login form {
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+
+.alc-login form label {
+	display: inline-block;
+	margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.5;
+	color: #2b2a27;
+}
+
+.alc-login form .input,
+.alc-login input[type="text"],
+.alc-login input[type="email"],
+.alc-login input[type="password"] {
+	box-sizing: border-box;
+	width: 100%;
+	height: 50px;
+	min-height: 50px;
+	margin: 4px 0 18px;
+	padding: 0 16px;
+	font-family: inherit;
+	font-size: 16px;
+	line-height: 1.4;
+	color: var(--alc-ink);
+	background: #fff;
+	border: 1px solid var(--alc-line);
+	border-radius: 12px;
+	box-shadow: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alc-login form .input:hover,
+.alc-login input[type="text"]:hover,
+.alc-login input[type="password"]:hover {
+	border-color: #c9c6be;
+}
+
+.alc-login form .input:focus,
+.alc-login input[type="text"]:focus,
+.alc-login input[type="email"]:focus,
+.alc-login input[type="password"]:focus {
+	border-color: var(--alc-accent);
+	box-shadow: 0 0 0 4px var(--alc-accent-soft);
+	outline: none;
+}
+
+.alc-login .wp-pwd {
+	position: relative;
+}
+
+.alc-login .wp-pwd input.password-input,
+.alc-login .wp-pwd input[type="password"],
+.alc-login .wp-pwd input[type="text"] {
+	padding-right: 56px;
+}
+
+.alc-login .button.wp-hide-pw {
+	top: 4px;
+	right: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 50px;
+	min-height: 50px;
+	padding: 0;
+	color: #6b6964;
+	border-radius: 10px;
+}
+
+.alc-login .button.wp-hide-pw:hover {
+	color: var(--alc-ink);
+	background: transparent;
+}
+
+.alc-login .button.wp-hide-pw:focus {
+	border-color: transparent;
+	box-shadow: 0 0 0 3px var(--alc-accent-ring);
+}
+
+.alc-login .button.wp-hide-pw .dashicons {
+	top: 0;
+}
+
+.alc-login #login form p.forgetmenot {
+	display: flex;
+	align-items: center;
+	float: none;
+	margin: 0 0 22px;
+}
+
+.alc-login form .forgetmenot label {
+	margin: 0;
+	font-weight: 400;
+	color: var(--alc-text);
+}
+
+.alc-login input[type="checkbox"] {
+	appearance: auto;
+	-webkit-appearance: checkbox;
+	width: 18px;
+	height: 18px;
+	min-width: 18px;
+	margin: 0 10px 0 0;
+	accent-color: var(--alc-accent);
+	box-shadow: none;
+}
+
+.alc-login input[type="checkbox"]::before {
+	display: none;
+}
+
+.alc-login .submit,
+.alc-login p.submit {
+	display: block;
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+.alc-login .button-primary,
+.alc-login #wp-submit {
+	float: none;
+	box-sizing: border-box;
+	width: 100%;
+	height: 52px;
+	min-height: 52px;
+	padding: 0 20px;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1;
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	border: 1px solid var(--alc-accent);
+	border-radius: 12px;
+	box-shadow: none;
+	text-shadow: none;
+	cursor: pointer;
+	transition: filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.alc-login .button-primary:hover,
+.alc-login .button-primary:focus,
+.alc-login #wp-submit:hover,
+.alc-login #wp-submit:focus {
+	color: var(--alc-accent-ink);
+	background: var(--alc-accent);
+	border-color: var(--alc-accent);
+	filter: brightness(0.92);
+}
+
+.alc-login .button-primary:focus-visible,
+.alc-login #wp-submit:focus-visible {
+	box-shadow: 0 0 0 4px var(--alc-accent-ring);
+	outline: none;
+}
+
+.alc-login .button-primary:active,
+.alc-login #wp-submit:active {
+	transform: translateY(1px);
+}
+
+.alc-login .button:not(.button-primary):not(.wp-hide-pw) {
+	min-height: 44px;
+	padding: 0 16px;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 42px;
+	color: var(--alc-ink);
+	background: #fff;
+	border: 1px solid var(--alc-line);
+	border-radius: 10px;
+	box-shadow: none;
+}
+
+.alc-login .button:not(.button-primary):not(.wp-hide-pw):hover {
+	border-color: #c9c6be;
+}
+
+/* Notices */
+.alc-login #login_error,
+.alc-login .notice,
+.alc-login .message,
+.alc-login .success {
+	margin: 0 0 22px;
+	padding: 12px 16px;
+	font-size: 14px;
+	line-height: 1.5;
+	border: 1px solid #e4e2dc;
+	border-radius: 12px;
+	background: #fff;
+	box-shadow: none;
+	color: #2b2a27;
+}
+
+.alc-login #login_error,
+.alc-login .notice-error {
+	background: #fdf1ef;
+	border-color: #f1cbc5;
+	color: #7a2114;
+}
+
+.alc-login .notice-success,
+.alc-login .success {
+	background: #eff7f1;
+	border-color: #c8e4cf;
+	color: #1d5a2c;
+}
+
+.alc-login #login_error p,
+.alc-login .notice p,
+.alc-login .message p {
+	margin: 0;
+	padding: 0;
+}
+
+.alc-login #login_error a,
+.alc-login .notice a,
+.alc-login .message a {
+	color: inherit;
+	text-decoration: underline;
+}
+
+/* Links under the form */
+.alc-login #nav,
+.alc-login #backtoblog {
+	margin: 22px 0 0;
+	padding: 0;
+	font-size: 14px;
+	text-align: left;
+}
+
+.alc-login #backtoblog {
+	margin-top: 28px;
+	padding-top: 20px;
+	border-top: 1px solid #e7e5e0;
+}
+
+.alc-login #nav a,
+.alc-login #backtoblog a,
+.alc-login .privacy-policy-page-link a {
+	color: var(--alc-text);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.alc-login #nav a:hover,
+.alc-login #backtoblog a:hover,
+.alc-login .privacy-policy-page-link a:hover {
+	color: var(--alc-accent-text);
+}
+
+.alc-login #nav a:focus,
+.alc-login #backtoblog a:focus,
+.alc-login .privacy-policy-page-link a:focus {
+	color: var(--alc-ink);
+	box-shadow: 0 0 0 2px var(--alc-accent-ring);
+	border-radius: 4px;
+}
+
+.alc-login .privacy-policy-page-link {
+	margin: 14px 0 0;
+	text-align: left;
+	font-size: 13px;
+}
+
+.alc-login .language-switcher {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 400px;
+	margin-top: 32px;
+	padding: 0;
+	text-align: left;
+}
+
+.alc-login .language-switcher label .dashicons {
+	color: var(--alc-text);
+}
+
+.alc-login .indicator-hint,
+.alc-login .description {
+	font-size: 13px;
+	color: var(--alc-text);
+}
+
+.alc-login .pw-weak {
+	margin: 0 0 18px;
+}
+
+/* Session-expired modal inside wp-admin */
+body.alc-login.interim-login {
+	display: block;
+	min-height: 0;
+	padding: 24px;
+}
+
+.alc-login.interim-login .alc-brand {
+	display: none;
+}
+
+/* Tablet and phone: panel becomes a header */
+@media (max-width: 900px) {
+	body.alc-login {
+		justify-content: flex-start;
+		padding: 0 0 40px;
+	}
+
+	.alc-brand {
+		position: relative;
+		width: 100%;
+		gap: 28px;
+		padding: 28px 24px 30px;
+	}
+
+	.alc-brand__body::before {
+		margin-bottom: 18px;
+	}
+
+	.alc-brand__headline {
+		max-width: 16ch;
+		font-size: clamp(30px, 7vw, 44px);
+	}
+
+	.alc-brand__sub {
+		margin-top: 12px;
+		font-size: 15px;
+	}
+
+	.alc-brand__foot {
+		display: none;
+	}
+
+	.alc-login #login {
+		max-width: 440px;
+		padding: 36px 24px 0;
+	}
+
+	.alc-login .language-switcher {
+		max-width: 440px;
+		padding: 0 24px;
+	}
+
+	.alc-form-head__title {
+		font-size: 28px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.alc-login * {
+		transition: none !important;
+	}
+}
