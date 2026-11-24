@@ -14,7 +14,7 @@ Read this file first, then `docs/HANDOFF.md` (current state and next steps). `do
 
 - Owner: Al-Ibiewi (Abubakar Zubair Okhayole), founder of Al-Ibiewi Studio, https://al-ibiewi.com.ng
 - Plugin slug: `alibiewi-console`. Display name: "Studio Console". Text domain: `alibiewi-console`.
-- Current version: **1.5.1** (see `readme.txt` changelog).
+- Current version: **1.5.2** (see `readme.txt` changelog).
 - Requires WordPress 6.2+ and PHP 7.4+. Tested on WP 6.8 and WP 7.1.
 - First live client site: Zone A Limited (shopzonea.com), a WooCommerce bag shop in Nigeria with Elementor, Fluent Forms and naira prices.
 

@@ -4,7 +4,7 @@ Tags: login, dashboard, white label, admin, branding
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,14 @@ Drop a square SVG at assets/img/studio-mark.svg. It appears automatically.
 * alc_login_locked (action): fires with the IP and username when an IP is paused. Handy for an n8n webhook alert.
 
 == Changelog ==
+
+= 1.5.2 =
+* Assistant: a product found by both the budget lookup and the page search is now cited once, so it no longer gets two buttons.
+* Assistant: a reply that mentions a "contact form" no longer adds a Contact page button. The button still appears when the reply points the visitor to a person.
+* Assistant: every product button shows its price, including products found through the page search.
+* Dashboard: on phones, long figures such as monthly sales no longer run into the card icon.
+* Dashboard: quick action descriptions wrap onto a second line instead of being cut off.
+* Dashboard: phones show a shorter search placeholder, so it is no longer cut off mid-word.
 
 = 1.5.1 =
 * Assistant: smarter shop answers. Knows the product count, categories and price range, and finds products by budget ("a bag for 30k", "under 20,000", "between 25k and 50k") or category.

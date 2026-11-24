@@ -250,6 +250,7 @@ body.alc-screen #wpbody-content {
 	line-height: 1.1;
 	letter-spacing: -0.02em;
 	font-variant-numeric: tabular-nums;
+	overflow-wrap: anywhere;
 }
 
 .alc-stat__label {
@@ -319,13 +320,14 @@ body.alc-screen #wpbody-content {
 }
 
 .alc-action__desc {
+	display: -webkit-box;
 	align-self: start;
 	overflow: hidden;
 	font-size: 12.5px;
 	line-height: 1.4;
 	color: var(--alc-muted);
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 /* Layout */
@@ -902,16 +904,22 @@ body.alc-screen #footer-left {
 		border-radius: 14px;
 	}
 
+	/* Icon above the figure, as in the quick actions, so long amounts get the full width. */
 	.alc-stat__icon.dashicons {
-		top: 14px;
-		right: 14px;
+		position: static;
 		width: 30px;
 		height: 30px;
+		margin-bottom: 4px;
 		font-size: 16px;
 	}
 
 	.alc-stat__value {
+		padding-right: 0;
 		font-size: 24px;
+	}
+
+	.alc-stat__value--long {
+		font-size: 20px;
 	}
 
 	.alc-section,

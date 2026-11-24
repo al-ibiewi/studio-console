@@ -46,6 +46,23 @@ class ALC_AI_Store {
 	}
 
 	/**
+	 * Live price of a product, formatted, or '' when the post is not a priced product.
+	 *
+	 * @param int $post_id Post ID.
+	 * @return string
+	 */
+	public static function price_of( $post_id ) {
+		if ( ! self::active() || 'product' !== get_post_type( $post_id ) ) {
+			return '';
+		}
+		$product = wc_get_product( $post_id );
+		if ( ! $product || '' === (string) $product->get_price() ) {
+			return '';
+		}
+		return self::money( $product->get_price() );
+	}
+
+	/**
 	 * Store facts as plain text, cached for an hour.
 	 *
 	 * @return string

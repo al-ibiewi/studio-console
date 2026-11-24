@@ -3,7 +3,7 @@
  * Plugin Name:       Al-Ibiewi Studio Console
  * Plugin URI:        https://al-ibiewi.com.ng
  * Description:       A branded login, a clean client dashboard, client mode, white-label controls and a Claude-powered website assistant, for websites built by Al-Ibiewi Studio.
- * Version:           1.5.1
+ * Version:           1.5.2
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            Al-Ibiewi Studio
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ALC_VERSION', '1.5.1' );
+define( 'ALC_VERSION', '1.5.2' );
 define( 'ALC_FILE', __FILE__ );
 define( 'ALC_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ALC_URL', plugin_dir_url( __FILE__ ) );

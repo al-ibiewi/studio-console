@@ -318,16 +318,28 @@ class ALC_AI {
 			$products = ALC_AI_Store::products_for( $question . ' ' . $previous );
 		}
 
-		$items = array();
-		$seen  = array();
+		$items  = array();
+		$seen   = array();
+		$priced = array(); // post ID => index in $items of its store match.
 		foreach ( array_merge( $products, $passages ) as $p ) {
 			$key = $p['post_id'] . '|' . md5( $p['content'] );
 			if ( isset( $seen[ $key ] ) || ( isset( $p['price'] ) && isset( $seen[ 'post' . $p['post_id'] ] ) ) ) {
 				continue;
 			}
-			$seen[ $key ]                 = true;
+			$seen[ $key ] = true;
+
+			// A passage from a product the store lookup already found joins that source,
+			// so the product is cited (and gets a button) once, with its price.
+			if ( ! isset( $p['price'] ) && isset( $priced[ $p['post_id'] ] ) ) {
+				$items[ $priced[ $p['post_id'] ] ]['content'] .= "\n" . $p['content'];
+				continue;
+			}
+
 			$seen[ 'post' . $p['post_id'] ] = true;
-			$items[]                      = $p;
+			if ( isset( $p['price'] ) ) {
+				$priced[ $p['post_id'] ] = count( $items );
+			}
+			$items[] = $p;
 			if ( count( $items ) >= 10 ) {
 				break;
 			}
@@ -341,7 +353,8 @@ class ALC_AI {
 				'n'     => $n,
 				'title' => $p['title'],
 				'url'   => $p['url'],
-				'meta'  => isset( $p['price'] ) ? $p['price'] : '',
+				// Products found by page search get their price too, so every product button shows one.
+				'meta'  => isset( $p['price'] ) ? $p['price'] : ALC_AI_Store::price_of( $p['post_id'] ),
 			);
 			$context  .= sprintf( "<source id=\"%d\" title=\"%s\">\n%s\n</source>\n", $n, esc_attr( $p['title'] ), $p['content'] );
 		}
@@ -380,8 +393,17 @@ class ALC_AI {
 		}
 
 		$actions = array();
-		foreach ( array_slice( $used, 0, 4 ) as $s ) {
-			$actions[] = array(
+		$linked  = array();
+		foreach ( $used as $s ) {
+			// One button per page, even when the reply cites two passages from it.
+			if ( isset( $linked[ $s['url'] ] ) ) {
+				continue;
+			}
+			if ( count( $actions ) >= 4 ) {
+				break;
+			}
+			$linked[ $s['url'] ] = true;
+			$actions[]           = array(
 				'kind'  => $s['meta'] ? 'product' : 'page',
 				'label' => $s['title'],
 				'meta'  => $s['meta'],
@@ -389,7 +411,7 @@ class ALC_AI {
 			);
 		}
 		$contact = self::contact_page_url();
-		if ( $contact && ( ! $found || preg_match( '/\b(contact|reach|get in touch|call|message)\b/i', $text ) ) ) {
+		if ( $contact && ( ! $found || preg_match( '/\b(contact(?!\s+forms?\b)|reach|get in touch|call|message)\b/i', $text ) ) ) {
 			$actions[] = array(
 				'kind'  => 'contact',
 				'label' => __( 'Contact page', 'alibiewi-console' ),

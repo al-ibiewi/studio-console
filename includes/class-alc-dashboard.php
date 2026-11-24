@@ -560,7 +560,7 @@ class ALC_Dashboard {
 					<div class="alc-search">
 						<span class="alc-search__icon dashicons dashicons-search" aria-hidden="true"></span>
 						<label class="screen-reader-text" for="alc-search-input"><?php esc_html_e( 'Search your website', 'alibiewi-console' ); ?></label>
-						<input type="search" id="alc-search-input" class="alc-search__input" placeholder="<?php esc_attr_e( 'Search pages, posts or what you want to do', 'alibiewi-console' ); ?>" role="combobox" aria-expanded="false" aria-controls="alc-search-results" aria-autocomplete="list" autocomplete="off">
+						<input type="search" id="alc-search-input" class="alc-search__input" placeholder="<?php esc_attr_e( 'Search pages, posts or what you want to do', 'alibiewi-console' ); ?>" data-short-placeholder="<?php esc_attr_e( 'Search or find a task', 'alibiewi-console' ); ?>" role="combobox" aria-expanded="false" aria-controls="alc-search-results" aria-autocomplete="list" autocomplete="off">
 						<kbd class="alc-search__kbd" aria-hidden="true">/</kbd>
 						<div class="alc-search__panel" hidden>
 							<ul id="alc-search-results" class="alc-search__results" role="listbox" aria-label="<?php esc_attr_e( 'Search results', 'alibiewi-console' ); ?>"></ul>
@@ -595,7 +595,7 @@ class ALC_Dashboard {
 							<?php if ( ! empty( $stat['icon'] ) ) : ?>
 								<span class="alc-stat__icon dashicons dashicons-<?php echo esc_attr( $stat['icon'] ); ?>" aria-hidden="true"></span>
 							<?php endif; ?>
-							<span class="alc-stat__value"><?php echo esc_html( $stat['value'] ); ?></span>
+							<span class="alc-stat__value<?php echo mb_strlen( (string) $stat['value'] ) > 8 ? ' alc-stat__value--long' : ''; ?>"><?php echo esc_html( $stat['value'] ); ?></span>
 							<span class="alc-stat__label"><?php echo esc_html( $stat['label'] ); ?></span>
 						</a>
 					<?php endforeach; ?>

@@ -8,6 +8,22 @@
 		return;
 	}
 
+	// Phones get a shorter placeholder so it is not cut off mid-word.
+	var longPlaceholder = input.getAttribute( 'placeholder' );
+	var shortPlaceholder = input.getAttribute( 'data-short-placeholder' );
+	if ( shortPlaceholder && window.matchMedia ) {
+		var narrow = window.matchMedia( '(max-width: 782px)' );
+		var fitPlaceholder = function () {
+			input.setAttribute( 'placeholder', narrow.matches ? shortPlaceholder : longPlaceholder );
+		};
+		fitPlaceholder();
+		if ( narrow.addEventListener ) {
+			narrow.addEventListener( 'change', fitPlaceholder );
+		} else if ( narrow.addListener ) {
+			narrow.addListener( fitPlaceholder );
+		}
+	}
+
 	var wrap = input.closest( '.alc-search' );
 	var panel = wrap.querySelector( '.alc-search__panel' );
 	var list = wrap.querySelector( '.alc-search__results' );
