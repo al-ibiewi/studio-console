@@ -18,7 +18,7 @@ The code is on GitHub at https://github.com/al-ibiewi/studio-console (public), a
 
 ## What to do next
 
-1. **Portfolio.** The case study belongs on al-ibiewi.com.ng (the owner is doing this in a separate session). The case study draft is a Claude doc: https://claude.ai/artifact/VtZ6TKDUXXkjydXZ5azdxC. The screenshots are in `screenshots/`. `screenshots/07-assistant.png` predates the 1.5.1 buttons and could be retaken.
+1. **Portfolio.** The case study belongs on al-ibiewi.com.ng (the owner is doing this in a separate session). The case study draft is a Claude doc: https://claude.ai/artifact/VtZ6TKDUXXkjydXZ5azdxC. The screenshots are in `screenshots/`. `screenshots/07-assistant.png` was retaken for 1.5.1 and shows the product buttons (on a local site with the fake Claude stand-in, so the reply wording is the stand-in's, not Haiku's).
 
 ## Ideas not yet started (only if the owner asks)
 
