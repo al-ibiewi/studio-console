@@ -662,3 +662,77 @@
 		font-size: 16px !important;
 	}
 }
+
+
+/* Link buttons under a reply */
+.alc-ai__actions {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-top: 12px;
+}
+
+.alc-ai .alc-ai__action {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 40px;
+	padding: 8px 12px;
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.3;
+	color: var(--alc-ai-ink) !important;
+	text-decoration: none !important;
+	background: #fff;
+	border: 1px solid var(--alc-ai-line);
+	border-radius: 12px;
+	transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.alc-ai .alc-ai__action:hover {
+	background: var(--alc-ai-accent-soft);
+	border-color: var(--alc-ai-accent);
+}
+
+.alc-ai__action-icon {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	color: var(--alc-ai-accent-text);
+	background: var(--alc-ai-accent-soft);
+	border-radius: 8px;
+}
+
+.alc-ai__action-label {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.alc-ai__action-meta {
+	flex: none;
+	font-weight: 600;
+	color: var(--alc-ai-accent-text);
+	font-variant-numeric: tabular-nums;
+}
+
+.alc-ai .alc-ai__action--contact {
+	color: var(--alc-ai-accent-ink) !important;
+	background: var(--alc-ai-accent);
+	border-color: var(--alc-ai-accent);
+}
+
+.alc-ai .alc-ai__action--contact:hover {
+	background: var(--alc-ai-accent);
+	filter: brightness(0.94);
+}
+
+.alc-ai__action--contact .alc-ai__action-icon {
+	color: var(--alc-ai-accent-ink);
+	background: rgba(255, 255, 255, 0.18);
+}

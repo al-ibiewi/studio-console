@@ -166,6 +166,7 @@ class ALC_AI_Index {
 		}
 
 		delete_transient( 'alc_ai_auto_suggest' );
+		delete_transient( 'alc_ai_store_facts' );
 		update_option(
 			'alc_ai_index_meta',
 			array(

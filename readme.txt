@@ -4,7 +4,7 @@ Tags: login, dashboard, white label, admin, branding
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,11 @@ Drop a square SVG at assets/img/studio-mark.svg. It appears automatically.
 * alc_login_locked (action): fires with the IP and username when an IP is paused. Handy for an n8n webhook alert.
 
 == Changelog ==
+
+= 1.5.1 =
+* Assistant: smarter shop answers. Knows the product count, categories and price range, and finds products by budget ("a bag for 30k", "under 20,000", "between 25k and 50k") or category.
+* Assistant: recommends specific products by name and price, closest match first, and gives partial answers instead of giving up.
+* Assistant: links now appear as buttons under the reply (products show their price), with a Contact page button when a person is needed. Raw web addresses are removed from replies.
 
 = 1.5.0 =
 * Launch release.

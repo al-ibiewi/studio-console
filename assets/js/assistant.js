@@ -14,6 +14,9 @@
 	var ICON_CHAT = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 4.5h16v11.5H10l-4.5 3.5V16H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 9h8M8 12.2h5"/></svg>';
 	var ICON_CLOSE = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>';
 	var ICON_PHONE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h3.5l1.7 4.3-2.2 1.4a11 11 0 0 0 6.3 6.3l1.4-2.2L20 15.5V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>';
+	var ICON_ARROW = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg>';
+	var ICON_BAG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 8h14l-1 12H6L5 8Z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>';
+	var ICON_MAIL = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="m4 7 8 6 8-6"/></svg>';
 	var ICON_SEND = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></svg>';
 
 	function el( tag, cls, text ) {
@@ -215,21 +218,28 @@
 			log.scrollTop = log.scrollHeight;
 		}
 
-		function addBot( text, sources, extraCls ) {
+		function addBot( text, sources, extraCls, actions ) {
 			var m = el( 'div', 'alc-ai__msg alc-ai__msg--bot' + ( extraCls ? ' ' + extraCls : '' ) );
 			m.appendChild( rich( text, sources || [] ) );
-			if ( sources && sources.length ) {
-				var box = el( 'div', 'alc-ai__sources' );
-				box.appendChild( el( 'span', 'alc-ai__sources-label', t.sources ) );
-				var row = el( 'div', 'alc-ai__sources-row' );
-				sources.forEach( function ( s ) {
-					var a = el( 'a', 'alc-ai__source' );
-					a.href = s.url;
-					a.appendChild( el( 'span', 'alc-ai__source-n', String( s.n ) ) );
-					a.appendChild( el( 'span', 'alc-ai__source-t', s.title ) );
-					row.appendChild( a );
+
+			// Older saved replies only have sources: show them as buttons too.
+			var list = actions && actions.length ? actions : ( sources || [] ).map( function ( s ) {
+				return { kind: s.meta ? 'product' : 'page', label: s.title, meta: s.meta || '', url: s.url };
+			} );
+			if ( list.length ) {
+				var box = el( 'div', 'alc-ai__actions' );
+				list.forEach( function ( a ) {
+					var b = el( 'a', 'alc-ai__action alc-ai__action--' + ( a.kind || 'page' ) );
+					b.href = a.url;
+					var icon = el( 'span', 'alc-ai__action-icon' );
+					icon.innerHTML = a.kind === 'product' ? ICON_BAG : ( a.kind === 'contact' ? ICON_MAIL : ICON_ARROW );
+					b.appendChild( icon );
+					b.appendChild( el( 'span', 'alc-ai__action-label', a.label ) );
+					if ( a.meta ) {
+						b.appendChild( el( 'span', 'alc-ai__action-meta', a.meta ) );
+					}
+					box.appendChild( b );
 				} );
-				box.appendChild( row );
 				m.appendChild( box );
 			}
 			log.appendChild( m );
@@ -271,7 +281,7 @@
 				if ( it.role === 'user' ) {
 					addUser( it.content );
 				} else {
-					var past = addBot( it.content, it.sources || [], it.error ? 'is-error' : ( it.gap ? 'is-gap' : '' ) );
+					var past = addBot( it.content, it.sources || [], it.error ? 'is-error' : ( it.gap ? 'is-gap' : '' ), it.actions || [] );
 					if ( it.gap || it.error ) {
 						var h1 = handoff();
 						if ( h1 ) {
@@ -327,8 +337,8 @@
 			} ).then( function ( res ) {
 				wait.remove();
 				if ( res.ok && res.json && typeof res.json.answer === 'string' ) {
-					items.push( { role: 'assistant', content: res.json.answer, sources: res.json.sources || [], gap: ! res.json.found } );
-					var reply = addBot( res.json.answer, res.json.sources || [], res.json.found ? '' : 'is-gap' );
+					items.push( { role: 'assistant', content: res.json.answer, sources: res.json.sources || [], actions: res.json.actions || [], gap: ! res.json.found } );
+					var reply = addBot( res.json.answer, res.json.sources || [], res.json.found ? '' : 'is-gap', res.json.actions || [] );
 					if ( ! res.json.found ) {
 						var h2 = handoff();
 						if ( h2 ) {
