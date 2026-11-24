@@ -12,6 +12,7 @@ You can use any local WordPress: LocalWP, wp-env (`npx @wordpress/env start`), X
 |---|---|
 | `test-fake-claude.php` | The Claude API. It answers by listing or quoting the sources it was given and records the request in the option `alc_test_last_request`. Use it to test the assistant without spending credits. |
 | `test-fake-woo.php` | Just enough of WooCommerce (product post type, `product_cat`, `wc_get_product`, `wc_price`, NGN) for the store logic. **Don't use it alongside real WooCommerce.** |
+| `test-fake-woo-orders.php` | Fake orders (from the option `alc_test_orders`) for the dashboard's sales, "Orders to fulfil" and "Recent orders" panels. Use with `test-fake-woo.php`. |
 | `fake-elementor.php` | An active Elementor kit, for logo and font detection |
 | `fake-fluent.php` | Fluent Forms, for the dashboard forms panel |
 | `test-hide-sqlite-badge.php` | Hides the SQLite drop-in admin notice in screenshots |
@@ -69,4 +70,12 @@ wp transient delete --all                                      # clear answer an
 **Uninstall**
 - Removes the options and the `alc_ai_chunks` table.
 
-Screenshots for the README were taken with Playwright and Chrome at a device scale factor of 2.
+## README screenshots
+
+The screenshots show a demo site branded as Al-Ibiewi Studio, with made-up packages, orders, enquiries and posts. Never use a client's name or data in them. The tools are in `dev/screenshots/`:
+
+1. Set up a local WordPress on SQLite (port 8899), install the release zip, and copy `test-fake-claude.php`, `test-fake-woo.php`, `test-fake-woo-orders.php`, `fake-fluent.php`, `test-hide-sqlite-badge.php` and `dev/screenshots/demo-polish.php` into `wp-content/mu-plugins/`.
+2. Create an admin with the login `studio` and the password `studio-local-only`, then run `wp eval-file dev/screenshots/seed-demo.php`. Then run `wp user set-role zainab alc_client`.
+3. In a scratch folder outside the repo, run `npm i playwright-core`. Then run `node shoot.js <outDir>` with `ALC_PHP`, `ALC_WPCLI` and `ALC_SITE` set. It uses your installed Chrome, 1440x900 at 2x for desktop and 390x844 at 3x for the phone shot.
+
+`demo-polish.php` shows HTTPS as on (the local site is plain http) and hides the SQLite menu. It also gives the screenshot question a natural reply, because the fake Claude's answers are deliberately mechanical.

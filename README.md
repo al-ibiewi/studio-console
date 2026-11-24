@@ -2,13 +2,13 @@
 
 A WordPress plugin I install on every client site built by [Al-Ibiewi Studio](https://al-ibiewi.com.ng). It gives clients a branded login, a dashboard they actually understand, a safe "Site Owner" role, and a Claude-powered assistant that answers visitor questions from the site's own pages and products.
 
-**[Download the latest release](https://github.com/al-ibiewi/studio-console/releases/latest)** · Version 1.5.1 · WordPress 6.2+ · PHP 7.4+ · GPL-2.0-or-later
+**[Download the latest release](https://github.com/al-ibiewi/studio-console/releases/latest)** · Version 1.5.2 · WordPress 6.2+ · PHP 7.4+ · GPL-2.0-or-later
 
 ![Branded login](screenshots/01-login.png)
 
-## In use
+## Who it is for
 
-Studio Console runs live on [Zone A Limited](https://shopzonea.com), a WooCommerce bag shop in Nigeria built with Elementor and Fluent Forms. The assistant answers shoppers in naira, suggests bags that fit their budget, and hands them to the shop's WhatsApp when they need a person.
+Any business running on WordPress: online shops, service businesses, schools and academies. It already runs on live client websites, with WooCommerce, Elementor and Fluent Forms. Owners get a back office they can use without training, and visitors get answers at any hour, in the site's own currency, with a WhatsApp handoff when they want a person.
 
 ## Features
 
@@ -53,11 +53,17 @@ Widget renders text safely (no HTML from the model)
 
 ## Screenshots
 
+Taken on a demo site with made-up data.
+
 | | |
 |---|---|
-| ![Dashboard](screenshots/02-dashboard.png) | ![Dashboard on a phone](screenshots/03-dashboard-mobile.png) |
-| ![Colour themes](screenshots/04-color-themes.png) | ![Client mode](screenshots/05-client-mode.png) |
-| ![Site Owner view](screenshots/06-site-owner-view.png) | ![Assistant](screenshots/07-assistant.png) |
+| ![Client dashboard with sales, orders and enquiries](screenshots/02-dashboard.png) | ![Dashboard on a phone](screenshots/03-dashboard-mobile.png) |
+| ![Client mode settings](screenshots/05-client-mode.png) | ![What a Site Owner sees](screenshots/06-site-owner-view.png) |
+| ![Assistant recommending packages for a budget](screenshots/07-assistant.png) | ![Assistant settings and usage](screenshots/08-ai-settings.png) |
+
+**Ten colour themes**, plus custom colours:
+
+![The ten colour themes](screenshots/04-color-themes.png)
 
 ## Install
 

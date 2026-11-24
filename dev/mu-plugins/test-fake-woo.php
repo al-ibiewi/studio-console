@@ -1,7 +1,7 @@
 <?php
 // TEST ONLY: just enough of WooCommerce for the assistant's store logic.
 add_action( 'init', function () {
-	register_post_type( 'product', array( 'public' => true, 'label' => 'Products', 'show_ui' => true, 'has_archive' => true ) );
+	register_post_type( 'product', array( 'public' => true, 'label' => 'Products', 'show_ui' => true, 'has_archive' => true, 'menu_icon' => 'dashicons-products' ) );
 	register_taxonomy( 'product_cat', 'product', array( 'public' => true, 'label' => 'Categories' ) );
 }, 0 );
 class ALC_Test_Product {

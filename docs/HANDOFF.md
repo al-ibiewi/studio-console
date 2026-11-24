@@ -1,10 +1,10 @@
 # Handoff: where things stand
 
-Last updated: 24 November 2026, at version 1.5.1.
+Last updated: 24 November 2026, at version 1.5.2.
 
 ## Status
 
-**Done and in use.** The plugin runs on Zone A Limited (shopzonea.com), and 1.5.1 has been checked there with the real Claude API. The owner has called it launch-ready and is adding it to his portfolio as a case study.
+**Done and in use.** The plugin runs on Zone A Limited (shopzonea.com), and 1.5.1 has been checked there with the real Claude API. It is meant for every client site, not just Zone A, so public material (README, screenshots) uses a demo site branded as Al-Ibiewi Studio, never a client's name. The owner has called it launch-ready and is adding it to his portfolio as a case study.
 
 The code is on GitHub at https://github.com/al-ibiewi/studio-console (public), and each release has its plugin zip attached: https://github.com/al-ibiewi/studio-console/releases
 
@@ -15,10 +15,11 @@ The code is on GitHub at https://github.com/al-ibiewi/studio-console (public), a
 | 1.4 | Client mode (Site Owner role) |
 | 1.5.0 | AI website assistant (Claude, BM25 retrieval, citations, WhatsApp handoff, auto-avoid, limits, log) |
 | 1.5.1 | Smarter shop answers (store facts, budget and category lookup), link buttons under replies, raw URLs removed |
+| 1.5.2 | Fixes: no duplicate product buttons, prices on every product button, no Contact button for "contact form", phone layout for long sales figures, quick action and search placeholder truncation |
 
 ## What to do next
 
-1. **Portfolio.** The case study belongs on al-ibiewi.com.ng (the owner is doing this in a separate session). The case study draft is a Claude doc: https://claude.ai/artifact/VtZ6TKDUXXkjydXZ5azdxC. The screenshots are in `screenshots/`. `screenshots/07-assistant.png` was retaken for 1.5.1 and shows the product buttons (on a local site with the fake Claude stand-in, so the reply wording is the stand-in's, not Haiku's).
+1. **Portfolio.** The case study belongs on al-ibiewi.com.ng (the owner is doing this in a separate session). The case study draft is a Claude doc: https://claude.ai/artifact/VtZ6TKDUXXkjydXZ5azdxC. The screenshots are in `screenshots/`. They were all retaken for 1.5.2 on the Al-Ibiewi Studio demo site with made-up data (see "README screenshots" in `docs/TESTING.md`).
 
 ## Ideas not yet started (only if the owner asks)
 
