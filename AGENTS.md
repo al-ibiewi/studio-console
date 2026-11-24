@@ -27,7 +27,7 @@ Read this file first, then `docs/HANDOFF.md` (current state and next steps). `do
 5. **Releasing a version.** Bump `Version:` in the plugin header, `ALC_VERSION` (assets are cache-busted with it) and `Stable tag` in `readme.txt`, and add a changelog entry. Then build with `bin/build.sh` or `bin/build.ps1`.
 6. **Never ship `dev/`.** Files in `dev/mu-plugins` are fake Elementor, Fluent Forms, WooCommerce and Claude stand-ins used for local testing only. `.gitattributes` and the build scripts exclude `dev/`, `docs/`, `bin/` and `screenshots/`.
 7. **Writing style (owner's preference).** Never use em dashes in UI text, docs, commits or replies. Keep the tone warm, results-driven and concise. The plugin UI is plain English for non-technical clients.
-8. **Git.** Commits are authored as `al-ibiewi <al-ibiewi@users.noreply.github.com>`. The intended remote is a **private** GitHub repo, `al-ibiewi/studio-console`. Each release is tagged `vX.Y.Z`.
+8. **Git.** Commits are authored as `al-ibiewi <al-ibiewi@users.noreply.github.com>`. The remote is the **public** GitHub repo `al-ibiewi/studio-console`, so never commit API keys, client data or anything else private. Each release is tagged `vX.Y.Z`.
 9. **The assistant uses the client's details, never the studio's.** Visitor-facing contact info comes only from the `ai_contact_*` settings or the site's contact page. The studio support fields (`support_*`) are only for the client's admin "Get help" button.
 10. **API cost.** Don't make live Claude API calls to a client site to test something. Locally, use `dev/mu-plugins/test-fake-claude.php`, which short-circuits requests through the `alc_ai_pre_request` filter.
 
